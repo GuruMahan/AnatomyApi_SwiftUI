@@ -10,7 +10,4 @@ import Foundation
 class AnatomyViewModel: ObservableObject {
     
     @Published var dataList : AnatomyModel? = AnatomyModel.loadMockData()
- 
-   
-    
 }

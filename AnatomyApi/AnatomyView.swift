@@ -13,9 +13,9 @@ struct AnatomyView: View {
     @State var nextPage = false
     @State var listView = ListView()
     var loadData = ""
+    
     var body: some View {
         NavigationStack{
-            
             ZStack{
                 LinearGradient(colors: [Color(hex:  "#FFDCDCDC").opacity(0.5)], startPoint: .leading, endPoint: .trailing)
                     .ignoresSafeArea()
@@ -23,9 +23,7 @@ struct AnatomyView: View {
                     VStack{
                         headerView
                             .frame(height: 100)
-                      
                     }
-                   
                     VStack{
                         ScrollView {
                             VStack{
@@ -33,49 +31,28 @@ struct AnatomyView: View {
                                     questionsView(question:viewModel.dataList?.data[index])
                                 }
                             }
-                            
                         }
                         .padding()
                         bottomView
-                        
                     }
-                    
-                    
                 }
             }
-           
-//            .sheet(isPresented: $nextPage) {
-//                listView
-                    .fullScreenCover(isPresented: $nextPage) {
-                        listView
-                    }
-           // }
-//            .navigationDestination(isPresented: $nextPage){
-//                listView
-//            .navigationBarTitleDisplayMode(.automatic)
-//            .navigationBarBackButtonHidden(true)
-//
-//        }
+            .fullScreenCover(isPresented: $nextPage) {
+                listView
+            }
         }
-        
-        
     }
     
     @ViewBuilder var headerView:some View{
-        
         ZStack {
-            
             LinearGradient(colors:[Color(hex: "1A7BDC"),Color(hex: "56B8FF")], startPoint: .leading, endPoint:.trailing).ignoresSafeArea()
             HStack{
                 Button {
-                    
                 } label: {
                     Image(systemName:"arrow.backward")
                         .foregroundColor(.white)
                 }
                 .padding(.top,-20)
-                
-                
                 VStack {
                     Text("Anatomy Intro Assessment")
                         .foregroundColor(.white)
@@ -84,63 +61,46 @@ struct AnatomyView: View {
                     Text(" Api Calls")
                         .foregroundColor(.white)
                         .font(Font.system(size: 12))
-                    
                         .padding(.top,1)
                         .padding(.leading,-30)
                 }
                 .padding()
             }
             .padding(.leading,-50)
-            
         }
     }
     
     @ViewBuilder func questionsView(question: innerData?) -> some View{
-   
-           
-  
         VStack {
-            
             VStack{
                 Text("Indian Peoples")
                 HStack{
                     VStack{
-                    Text("popilation:\(question?.population ?? 0)")
+                        Text("popilation:\(question?.population ?? 0)")
                             .padding(.leading)
                             .background(Color.white)
-                    Text("idYear: \(question?.idYear ?? 0)")
+                        Text("idYear: \(question?.idYear ?? 0)")
                             .background(Color.brown)
-
-                }
+                    }
                     Spacer()
-
                     VStack{
                         Text("Nation: \(question?.nation ?? "")")
                             .background(Color.green)
                         Text("idNation:\(question?.idNation ?? "" )")
                     }
-
                 }
-
             }
             Divider()
             HStack {
-                
             }
             Spacer()
         }
-       
-        
     }
     
-    
     @ViewBuilder var bottomView: some View{
-        
         ZStack{
-            
-           
             Button {
-             nextPage = true
+                nextPage = true
             } label: {
                 Text("Submit")
                     .font(Font.system(size: 18))
@@ -151,12 +111,8 @@ struct AnatomyView: View {
                     .cornerRadius(20)
                     .padding()
             }
-            
         }
-        
-        
     }
-    
 }
 
 
@@ -182,7 +138,6 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-        
         self.init(
             .sRGB,
             red: Double(r) / 255,

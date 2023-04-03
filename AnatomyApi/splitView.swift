@@ -4,6 +4,7 @@
 //
 //  Created by Guru Mahan on 29/12/22.
 //
+
 enum DemoScreen: String, Codable {
     case first, second, third,four,five,six,seven
 
@@ -11,18 +12,19 @@ enum DemoScreen: String, Codable {
         rawValue.capitalized
     }
 }
+
 import SwiftUI
 
 struct splitView: View {
+   
+    @Environment(\.presentationMode) var presentationMode
     @State var nextPage = false
    @State var listView = ListView()
       @State
         private var selection: DemoScreen? = .first
-    @Environment(\.presentationMode) var presentationMode
+    
         var body: some View {
-           
             NavigationSplitView {
-                
                 HStack{
                     Button {
                         self.presentationMode.wrappedValue.dismiss()
@@ -32,9 +34,7 @@ struct splitView: View {
                     }
                     .padding()
                     Spacer()
-                       
                 }
-               
                 sidebarContent
                 VStack{
                     Button {
@@ -50,10 +50,9 @@ struct splitView: View {
                listView
             }
         }
-        
 }
-extension splitView {
 
+extension splitView {
     var sidebarContent: some View {
         List {
             link(to: .first)
@@ -75,7 +74,7 @@ extension splitView {
 }
 
 extension splitView {
-    
+
     @ViewBuilder
     var detailContent: some View {
         if let selection = selection {
@@ -86,18 +85,12 @@ extension splitView {
         }
     }
     
-    
     @ViewBuilder
     func detailContent(for screen: DemoScreen) -> some View {
-   
-       
-     
             switch screen {
             case .first:
                 Button("First button")
                 {
-                    
-                    
                 }
             case .second: Button("Second button") {}
             case .third: Button("Second button") {}
@@ -110,10 +103,7 @@ extension splitView {
             case .seven:
                 Button("First button") {}
             }
-            
         }
-    
-
 }
 
 struct splitView_Previews: PreviewProvider {
